@@ -52,6 +52,7 @@ public class LevelBuilder : MonoBehaviour
     {
         cameraManager.PlaceCamera(maxSide);
         int iObjectPlacementNumber = 0;
+        int iObjectMovementNumber = 0;
         int iObjectColorNumber = 0;
         string[] sLevelObjects = sLevel.Split(MMConstants.LEVEL_SEPARATOR);
         scenarioObjects = new GameObject[sLevelObjects.Length];
@@ -121,6 +122,13 @@ public class LevelBuilder : MonoBehaviour
                             iObjectColorNumber++;
                         }
                     }
+
+                    if (MMUtils.IsPushableObject(goToInstantiate.GetComponent<ScenarioObject>().tTileType))
+                    {
+                        goNewObj.GetComponent<MovementObject>().bEnableMovement = GetCurrentLevel().objMovementEnabled[iObjectMovementNumber];
+                        iObjectMovementNumber++;
+                    }
+
                 }
                 else if(!goNewTile.activeInHierarchy)
                 {

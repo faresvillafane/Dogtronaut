@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 [ExecuteInEditMode]
 [SelectionBase]
 public class Tile : MonoBehaviour
@@ -16,7 +17,7 @@ public class Tile : MonoBehaviour
 
     public GameObject goTile;
 
-    public bool bMovementOn = true;
+    public bool bMovementOn = false;
 
     private void Update()
     {

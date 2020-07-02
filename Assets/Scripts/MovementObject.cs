@@ -19,17 +19,31 @@ public class MovementObject : ScenarioObject
 
     protected Vector3 v3LookDirection = Vector3.left;
 
+    public GameObject[] goMovementObjects;
+
 
     protected new void Start()
     {
         base.Start();
         qTargetRotation = transform.rotation;
         v3TargetPosition = transform.position;
+        SetEnableMovement();
     }
 
     protected void Update()
     {
         ManageMoves();
+    }
+    protected void SetEnableMovement()
+    {
+        if (bEnableMovement)
+        {
+            for (int i = 0; i< goMovementObjects.Length;i++)
+            {
+                goMovementObjects[i].SetActive(false);
+            }
+        }
+
     }
 
     private void ManageMoves()
@@ -78,8 +92,14 @@ public class MovementObject : ScenarioObject
 
     }
 
+    public bool FinishedMoving()
+    {
+        return bfinishedMoving;
+    }
+
     public void Move(Vector3 v3Direction)
     {
+        print("move");
         if (bEnableMovement)
         {
             if (bRotateBeforeMove && v3LookDirection != v3Direction)
@@ -105,22 +125,24 @@ public class MovementObject : ScenarioObject
             }
             else
             {
+                print(name);
                 if (ValidateMove(v3Direction))
                 {
                     v3TargetPosition += v3Direction;
                     bfinishedMoving = false;
                     RefreshLevelReference(v3Direction);
                 }
+                
                 else if (ValidatePush(v3Direction))
                 {
                     int index = MMUtils.MatrixIndexesToListIndex(transform.position + v3Direction, levelBuilder.GetCurrentLevel().MaxSize);
                     MovementObject mvObjectToMove = levelBuilder.scenarioObjects[index].GetComponent<MovementObject>();
-                    if (mvObjectToMove != null)
+                    if (mvObjectToMove != null && mvObjectToMove.bEnableMovement)
                     {
                         mvObjectToMove.Move(v3Direction);
                     }
                 }
-
+                
             }
         }
     }

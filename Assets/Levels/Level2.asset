@@ -18,7 +18,7 @@ MonoBehaviour:
   objRotation:
   - {x: -0, y: 90, z: -0}
   - {x: -0, y: 0, z: 0}
-  - {x: -0, y: -120, z: -0}
+  - {x: 0, y: 240, z: 0}
   - {x: -0, y: 44.999996, z: -0}
   - {x: 0, y: 180, z: 0}
   - {x: -0, y: 0, z: 0}
@@ -27,4 +27,5 @@ MonoBehaviour:
   - {r: 1, g: 0, b: 0, a: 1}
   - {r: 1, g: 0, b: 0, a: 1}
   - {r: 1, g: 1, b: 0, a: 1}
+  objMovementEnabled: 01010101
   MaxSize: 5

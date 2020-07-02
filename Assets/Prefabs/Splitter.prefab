@@ -28,7 +28,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 547257181587105425}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -112,9 +112,13 @@ MonoBehaviour:
   bIsInteractable: 1
   sInteractionText: Q or E Mirror Lasers
   v3Offset: {x: 0, y: -0.3, z: 0}
+  bEnableRandomYRotation: 0
+  bFree: 1
+  iStepRotation: 360
   bEnableMovement: 1
   bEnableRotation: 0
   bRotateBeforeMove: 0
+  goMovementObjects: []
 --- !u!114 &1359123070538371182
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,6 +131,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 698abeb9ad252d840b1a156c3027ce57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fMovement: 0.25
-  fDuration: 2
+  mt: 0
+  fOffset: 0.03
+  fSpeed: 1
   ease: 1
+  mo: {fileID: 1951273265873475386}

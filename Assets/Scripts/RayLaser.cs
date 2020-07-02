@@ -18,7 +18,7 @@ public class RayLaser : ScenarioObject
 
     private float timeSinceLastTryToSolve = 0;
 
-    public GameObject goCilinderContainer;
+    public GameObject[] goBase;
     public Renderer recRenderer;
 
     private const float ANGLE_TO_SPLIT = 90;
@@ -160,7 +160,10 @@ public class RayLaser : ScenarioObject
 
     public void SetCilinderActive(bool bActive)
     {
-        goCilinderContainer.SetActive(bActive);
+        for(int i = 0; i < goBase.Length; i++)
+        {
+            goBase[i].SetActive(bActive);
+        }
     }
 
 

@@ -110,6 +110,9 @@ MonoBehaviour:
   bIsInteractable: 0
   sInteractionText: 
   v3Offset: {x: 0, y: 0, z: 0}
+  bEnableRandomYRotation: 0
+  bFree: 1
+  iStepRotation: 360
 --- !u!1 &2036984470132568252
 GameObject:
   m_ObjectHideFlags: 0
@@ -360,6 +363,13 @@ MonoBehaviour:
   bIsInteractable: 0
   sInteractionText: 
   v3Offset: {x: 0, y: 0.2, z: 0}
+  bEnableRandomYRotation: 0
+  bFree: 1
+  iStepRotation: 360
+  bEnableMovement: 1
+  bEnableRotation: 1
+  bRotateBeforeMove: 0
+  goMovementObjects: []
   clrLaser:
     serializedVersion: 2
     rgba: 4278223103
@@ -367,5 +377,7 @@ MonoBehaviour:
   laserDistance: 9999
   maxBounce: 30
   maxSplit: 30
-  goCilinderContainer: {fileID: 2036984470132568252}
+  goBase:
+  - {fileID: 2036984470132568252}
+  - {fileID: 1286576565506889258}
   recRenderer: {fileID: 2036984470132568255}

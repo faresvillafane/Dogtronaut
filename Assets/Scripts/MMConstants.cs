@@ -24,7 +24,8 @@ public class MMConstants
 
 
     public const string LANG_LEVEL_COMPLETE      = "Level Completed!";
-    public const string LANG_MENU                = "R --> Restart level";
+    public const string LANG_MENU                = "R --> Restart level" +
+                                                    " ESC --> EXIT";
 
     public const char LEVEL_SEPARATOR       = ',';
 
@@ -32,7 +33,7 @@ public class MMConstants
     public static readonly Color32 RED         = new Color32(255,  0,      0,      255);
     public static readonly Color32 YELLOW      = new Color32(255,  255,    0,      255);
 
-    public static readonly Color32 GREEN       = new Color32(255,  0,      255,    255);
+    public static readonly Color32 GREEN       = new Color32(0,  255,      0,    255);
     public static readonly Color32 ORANGE      = new Color32(255,  128,      0,    255);
     public static readonly Color32 PURPLE      = new Color32(128,  0,      255,    255);
 

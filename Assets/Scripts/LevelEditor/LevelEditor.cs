@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-
+#if UNITY_EDITOR
+using UnityEditor;
+using UnityEditor.SceneManagement;
+#endif
 [ExecuteInEditMode]
 public class LevelEditor : MonoBehaviour
 {
@@ -67,6 +69,7 @@ public class LevelEditor : MonoBehaviour
     {
         iNumberOfObjects = 0;
         iNumberOfColors = 0;
+        iNumberOfMovementObjects = 0;
         MMUtils.DeleteAllChildren(tContainer);
     }
  
@@ -88,7 +91,7 @@ public class LevelEditor : MonoBehaviour
                 tiles[i].transform.localPosition.x == iTileSize - 1 ||
                 tiles[i].transform.localPosition.z == iTileSize - 1)
             {
-                tiles[i].GetComponent<Tile>().ttTile = MMEnums.TileType.EMPTY;
+                tiles[i].GetComponent<Tile>().ttTile = MMEnums.TileType.NONE;
             }
         }
     }
@@ -152,9 +155,8 @@ public class LevelEditor : MonoBehaviour
                             iNumberOfObjects++;
                         }
 
-                        if (goNewObj.GetComponent<MovementObject>() != null)
+                        if (MMUtils.IsPushableObject(tiles[i].GetComponent<Tile>().ttTile))
                         {
-                            tiles[i].GetComponent<Tile>().bMovementOn = goNewObj.GetComponent<MovementObject>().bEnableMovement;
                             iNumberOfMovementObjects++;
                         }
 
@@ -174,7 +176,7 @@ public class LevelEditor : MonoBehaviour
                             else if (tiles[i].GetComponent<Tile>().ttTile == MMEnums.TileType.RECEIVER)
                             {
 
-                                Renderer recRenderer = tiles[i].GetComponentInChildren<Receiver>().GetComponentsInChildren<Renderer>()[1];
+                                Renderer recRenderer = tiles[i].GetComponentInChildren<Receiver>().GetComponentsInChildren<Renderer>()[2];
                                 recRenderer.materials[0].SetColor("_Color", tiles[i].GetComponent<Tile>().clrObject);
 
                             }
@@ -197,8 +199,9 @@ public class LevelEditor : MonoBehaviour
         lvlExit.levelBuild = "";
         Vector3[] v3ObjectsRotations = new Vector3[iNumberOfObjects];
         Color[] clrObjects = new Color[iNumberOfColors];
+        bool[] bMovementObjects = new bool[iNumberOfMovementObjects];
 
-        int iObjIndex = 0, iClrIndex = 0;
+        int iObjIndex = 0, iClrIndex = 0, iObjMoveIndex = 0;
         for (int i = 0; i < tiles.Length; i++)
         {
             lvlExit.levelBuild += ((int)tiles[i].GetComponent<Tile>().ttTile).ToString() + MMConstants.LEVEL_SEPARATOR;
@@ -215,12 +218,31 @@ public class LevelEditor : MonoBehaviour
 
                 iClrIndex++;
             }
+
+            if (MMUtils.IsPushableObject(tiles[i].GetComponent<Tile>().ttTile))
+            {
+                bMovementObjects[iObjMoveIndex] = tiles[i].GetComponent<Tile>().bMovementOn;
+                iObjMoveIndex++;
+            }
         }
 
-        lvlExit.objColor = clrObjects;
-        lvlExit.objRotation = v3ObjectsRotations;
+        lvlExit.objColor = new Color[iNumberOfColors];
+        lvlExit.objColor = (Color[])clrObjects.Clone();
+
+        lvlExit.objRotation = new Vector3[iNumberOfObjects];
+        lvlExit.objRotation = (Vector3[])v3ObjectsRotations.Clone();
+
+        lvlExit.objMovementEnabled = new bool[iNumberOfMovementObjects];
+        lvlExit.objMovementEnabled = (bool[])bMovementObjects.Clone();
+
         lvlExit.levelBuild = lvlExit.levelBuild.Substring(0, lvlExit.levelBuild.Length - 1);
         lvlExit.MaxSize = iTileSize;
+#if UNITY_EDITOR
+        AssetDatabase.SaveAssets();
+        EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
+        EditorUtility.SetDirty(lvlExit);
+#endif
+
         print("DATA GENERATED!");
     }
 
@@ -233,7 +255,7 @@ public class LevelEditor : MonoBehaviour
         BuildLevelTiles(lvlExit.MaxSize);
 
         string[] sLevelData = lvlExit.levelBuild.Split(MMConstants.LEVEL_SEPARATOR);
-        int iColorObjectIdx = 0, iRotationIdx = 0;
+        int iColorObjectIdx = 0, iRotationIdx = 0, iObjMoveIdx = 0;
         for(int i= 0; i < sLevelData.Length; i++)
         {
             
@@ -250,6 +272,13 @@ public class LevelEditor : MonoBehaviour
 
                 iRotationIdx++;
             }
+
+            if (MMUtils.IsPushableObject(tiles[i].GetComponent<Tile>().ttTile))
+            {
+                tiles[i].GetComponent<Tile>().bMovementOn = lvlExit.objMovementEnabled[iObjMoveIdx];
+                iObjMoveIdx++;
+            }
+
         }
         RefreshTiles();
 

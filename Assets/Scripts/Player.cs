@@ -7,14 +7,20 @@ public class Player : MovementObject
 
     // Start is called before the first frame update
 
-    private const float BUTTON_COOLDOWN = .2f;
+    private const float BUTTON_COOLDOWN = .1f;
     private bool bOnCooldown = false;
     private float fCurrentCooldown = 0;
     private UIManager uiManager;
+    private GameController gc;
 
     private void Awake()
     {
         uiManager = GameObject.FindGameObjectWithTag(MMConstants.TAG_GAME_CONTROLLER).GetComponent<UIManager>();
+        gc = GameObject.FindGameObjectWithTag(MMConstants.TAG_GAME_CONTROLLER).GetComponent<GameController>();
+
+        
+
+
     }
     new void Start()
     {
@@ -30,12 +36,12 @@ public class Player : MovementObject
         {
             bOnCooldown = false;
         }
-        if (bfinishedMoving && !bOnCooldown)
+        if (bfinishedMoving && !bOnCooldown && gc.FinishedMovingAllObjects())
         {
             if(Input.GetAxis(MMConstants.INPUT_HORIZONTAL) > 0)
             {
-                Move(Vector3.right);
                 SetButtonCooldown();
+                Move(Vector3.right);
             }
             else if(Input.GetAxis(MMConstants.INPUT_HORIZONTAL) < 0)
             {

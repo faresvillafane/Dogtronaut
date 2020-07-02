@@ -48,7 +48,7 @@ public class MMUtils : MonoBehaviour
 
     public static bool IsPushableObject(MMEnums.TileType tt)
     {
-        return (tt == MMEnums.TileType.CHARACTER || tt == MMEnums.TileType.LASER || tt == MMEnums.TileType.MIRROR || tt == MMEnums.TileType.RECEIVER || tt == MMEnums.TileType.SPLITTER);
+        return (tt == MMEnums.TileType.MIRROR || tt == MMEnums.TileType.RECEIVER || tt == MMEnums.TileType.SPLITTER || tt == MMEnums.TileType.BIG_ROCK);
     }
 
     public static Color32[] ColorSplitter(Color32 clrToSplit)

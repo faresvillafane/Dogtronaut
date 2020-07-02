@@ -154,7 +154,7 @@ MonoBehaviour:
   bEnableMovement: 1
   bEnableRotation: 1
   bRotateBeforeMove: 0
-  goStands:
+  goMovementObjects:
   - {fileID: 4538211713903281840}
   - {fileID: 1413502358130553074}
 --- !u!114 &75645613514527474
@@ -170,7 +170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mt: 0
-  fOffset: 0.1
+  fOffset: 0.075
   fSpeed: 1
   ease: 1
   mo: {fileID: 2730758150380204494}

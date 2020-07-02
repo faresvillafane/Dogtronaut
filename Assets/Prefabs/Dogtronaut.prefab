@@ -218,12 +218,13 @@ MonoBehaviour:
   bIsInteractable: 0
   sInteractionText: 
   v3Offset: {x: 0, y: 0.3, z: 0}
-  bEnableRandomYRotation: 1
+  bEnableRandomYRotation: 0
   bFree: 0
-  iStepRotation: 90
+  iStepRotation: 0
   bEnableMovement: 1
   bEnableRotation: 1
   bRotateBeforeMove: 1
+  goMovementObjects: []
 --- !u!95 &8717464605438557451
 Animator:
   serializedVersion: 3
@@ -257,7 +258,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mt: 0
   fOffset: 0.1
-  fDuration: 2
+  fSpeed: 2
   ease: 1
   mo: {fileID: 4653436837939410955}
 --- !u!1 &3165783783250842308

@@ -15,7 +15,7 @@ public class LevelData : ScriptableObject
 
     public Vector3[] objRotation;
     public Color[] objColor;
-    public bool[] bMovementEnabled;
+    public bool[] objMovementEnabled;
 
     public int MaxSize = 5;
 

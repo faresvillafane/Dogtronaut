@@ -9,6 +9,7 @@ public class Splitter : MovementObject
     private List<SplitterSolution> ssSpliterSolutions = new List<SplitterSolution>();
     private const int MAX_SPLITTER = 10;
     // Update is called once per frame
+    private bool bDeletedThisRound = false;
     new void Update()
     {
         base.Update();
@@ -20,19 +21,20 @@ public class Splitter : MovementObject
 
     private void CheckAndRemoveForPastSplits()
     {
-        foreach (SplitterSolution ss in ssSpliterSolutions)
+        bDeletedThisRound = false;
+        for (int i = 0; i < ssSpliterSolutions.Count && !bDeletedThisRound; i++)//  SplitterSolution ss in ssSpliterSolutions)
         {
-            ss.fTimeSinceLastSolve += Time.deltaTime;
-
-            if (ss.fTimeSinceLastSolve >= UNSPLIT_EVERY_SEC)
+            ssSpliterSolutions[i].fTimeSinceLastSolve += Time.deltaTime;
+            if (ssSpliterSolutions[i].fTimeSinceLastSolve >= UNSPLIT_EVERY_SEC)
             {
-                for (int j = 0; j< ss.tLasers.Length;j++)
+                for (int j = 0; j< ssSpliterSolutions[i].tLasers.Length;j++)
                 {
-                    Destroy(ss.tLasers[j].gameObject);
+                    Destroy(ssSpliterSolutions[i].tLasers[j].gameObject);
                 }
 
 
-                ssSpliterSolutions.Remove(ss);
+                ssSpliterSolutions.Remove(ssSpliterSolutions[i]);
+                bDeletedThisRound = true;
             }
         }
     }

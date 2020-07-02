@@ -20,6 +20,8 @@ public class GameController : MonoBehaviour
 
     public GameObject canvas;
 
+    public MovementObject[] mo;
+
 
     // Start is called before the first frame update
     void Start()
@@ -37,7 +39,7 @@ public class GameController : MonoBehaviour
         bToNextLevel = false;
         bIsComplete = false;
         receivers = GameObject.FindGameObjectsWithTag(MMConstants.TAG_RECEIVER);
-
+        mo = GetComponentsInChildren<MovementObject>();
     }
 
     public void SetLevelStatus(string sLevel, int iLevelDim)
@@ -78,6 +80,11 @@ public class GameController : MonoBehaviour
         {
             ResetLevel();
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
 
     private bool CheckLevelCompletion()
@@ -104,5 +111,14 @@ public class GameController : MonoBehaviour
     {
         levelBuilder.DeleteLevel();
         Init();
+    }
+    public bool FinishedMovingAllObjects()
+    {
+        bool bRes = true;
+        for(int i = 0; i < mo.Length && bRes; i++)
+        {
+            bRes = mo[i].FinishedMoving();
+        }
+        return bRes;
     }
 }
