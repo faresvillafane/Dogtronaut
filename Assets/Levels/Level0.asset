@@ -23,5 +23,5 @@ MonoBehaviour:
   objColor:
   - {r: 1, g: 0, b: 0, a: 1}
   - {r: 1, g: 0, b: 0, a: 1}
-  objMovementEnabled: 010000
+  objMovementEnabled: 000000
   MaxSize: 9

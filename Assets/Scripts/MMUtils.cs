@@ -51,6 +51,11 @@ public class MMUtils : MonoBehaviour
         return (tt == MMEnums.TileType.MIRROR || tt == MMEnums.TileType.RECEIVER || tt == MMEnums.TileType.SPLITTER || tt == MMEnums.TileType.BIG_ROCK);
     }
 
+    public static bool IsWalkableObject(MMEnums.TileType tt)
+    {
+        return (tt == MMEnums.TileType.EMPTY);
+    }
+    
     public static Color32[] ColorSplitter(Color32 clrToSplit)
     {
         Color32[] clrSplitted;

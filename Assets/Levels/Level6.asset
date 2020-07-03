@@ -31,5 +31,5 @@ MonoBehaviour:
   - {r: 0.5019608, g: 0, b: 1, a: 1}
   - {r: 1, g: 0.5019608, b: 0, a: 1}
   - {r: 0.5019608, g: 0, b: 1, a: 1}
-  objMovementEnabled: 00000000000000000000010101010000
+  objMovementEnabled: 000000000000000000000101000100
   MaxSize: 9

@@ -26,5 +26,5 @@ MonoBehaviour:
   - {r: 0.5019608, g: 0, b: 1, a: 1}
   - {r: 1, g: 0, b: 0, a: 1}
   - {r: 0, g: 0, b: 1, a: 1}
-  objMovementEnabled: 0101010000
+  objMovementEnabled: 01010000
   MaxSize: 7

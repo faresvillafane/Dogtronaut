@@ -11,7 +11,6 @@ public class SinMovement : MonoBehaviour
     private Vector3 v3StartingV3;
     public float fOffset = .25f;
     public float fSpeed = 2f;
-    public Ease ease = Ease.Linear;
     public MovementObject mo;
 
     private float fSinValue = 0;

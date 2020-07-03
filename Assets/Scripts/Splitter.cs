@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Splitter : MovementObject
 {
-    private const float UNSPLIT_EVERY_SEC = .5f;
+    private const float UNSPLIT_EVERY_SEC = .1f;
 
     private List<SplitterSolution> ssSpliterSolutions = new List<SplitterSolution>();
     private const int MAX_SPLITTER = 10;

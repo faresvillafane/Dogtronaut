@@ -136,7 +136,7 @@ public class LevelBuilder : MonoBehaviour
                 }
                 else
                 {
-                    scenarioObjects[index] = null;
+                    scenarioObjects[index] = goNewTile;
                 }
 
             }

@@ -60,7 +60,7 @@ public class Player : MovementObject
             }
 
             GameObject soLookingAt = GetLookingAtObject(v3LookDirection);
-            if(soLookingAt != null && soLookingAt.GetComponent<ScenarioObject>().IsInteractable())
+            if(soLookingAt.GetComponent<ScenarioObject>().IsInteractable())
             {
                 if ((Input.GetAxis(MMConstants.INPUT_TRIGGERS) != 0))
                 {

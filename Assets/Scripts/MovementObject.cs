@@ -7,6 +7,7 @@ public class MovementObject : ScenarioObject
     private Quaternion qTargetRotation = Quaternion.Euler(Vector3.zero);
 
     private Vector3 v3TargetPosition;
+    private Vector3 v3CurrentPosition;
 
     private float fRotatingSpeed = .05f;
     private float fMovementSpeed = .1f;
@@ -26,7 +27,7 @@ public class MovementObject : ScenarioObject
     {
         base.Start();
         qTargetRotation = transform.rotation;
-        v3TargetPosition = transform.position;
+        v3CurrentPosition = v3TargetPosition = transform.position;
         SetEnableMovement();
     }
 
@@ -72,6 +73,7 @@ public class MovementObject : ScenarioObject
         else
         {
             transform.position = GetTargetMovement();
+            v3CurrentPosition = GetTargetMovement();
             return true;
         }
 
@@ -99,7 +101,6 @@ public class MovementObject : ScenarioObject
 
     public void Move(Vector3 v3Direction)
     {
-        print("move");
         if (bEnableMovement)
         {
             if (bRotateBeforeMove && v3LookDirection != v3Direction)
@@ -125,7 +126,6 @@ public class MovementObject : ScenarioObject
             }
             else
             {
-                print(name);
                 if (ValidateMove(v3Direction))
                 {
                     v3TargetPosition += v3Direction;
@@ -135,11 +135,11 @@ public class MovementObject : ScenarioObject
                 
                 else if (ValidatePush(v3Direction))
                 {
-                    int index = MMUtils.MatrixIndexesToListIndex(transform.position + v3Direction, levelBuilder.GetCurrentLevel().MaxSize);
+                    int index = MMUtils.MatrixIndexesToListIndex(v3CurrentPosition + v3Direction, levelBuilder.GetCurrentLevel().MaxSize);
                     MovementObject mvObjectToMove = levelBuilder.scenarioObjects[index].GetComponent<MovementObject>();
-                    if (mvObjectToMove != null && mvObjectToMove.bEnableMovement)
+                    if (mvObjectToMove.bEnableMovement)
                     {
-                        mvObjectToMove.Move(v3Direction);
+                        StartCoroutine(mvObjectToMove.Movequeue(v3Direction));
                     }
                 }
                 
@@ -147,33 +147,39 @@ public class MovementObject : ScenarioObject
         }
     }
 
+    public IEnumerator Movequeue(Vector3 v3Direction)
+    {
+        yield return new WaitForEndOfFrame();
+        Move(v3Direction);
+    }
+
     protected GameObject GetLookingAtObject(Vector3 v3LookDirection)
     {
-        int index = MMUtils.MatrixIndexesToListIndex(transform.position + v3LookDirection, levelBuilder.GetCurrentLevel().MaxSize);
+        int index = MMUtils.MatrixIndexesToListIndex(v3CurrentPosition + v3LookDirection, levelBuilder.GetCurrentLevel().MaxSize);
         return levelBuilder.scenarioObjects[index];
 
     }
 
     private bool ValidateMove(Vector3 v3Direction)
     {
-        int index = MMUtils.MatrixIndexesToListIndex(transform.position + v3Direction, levelBuilder.GetCurrentLevel().MaxSize);
-        return (levelBuilder.scenarioObjects[index] == null);
+        int index = MMUtils.MatrixIndexesToListIndex(v3CurrentPosition + v3Direction, levelBuilder.GetCurrentLevel().MaxSize);
+        return MMUtils.IsWalkableObject(levelBuilder.scenarioObjects[index].GetComponent<ScenarioObject>().tTileType) && levelBuilder.scenarioObjects[index].activeInHierarchy;
     }
 
     private bool ValidatePush(Vector3 v3Direction)
     {
-        int index = MMUtils.MatrixIndexesToListIndex(transform.position + v3Direction, levelBuilder.GetCurrentLevel().MaxSize);
-        return MMUtils.IsPushableObject(levelBuilder.scenarioObjects[index].GetComponent<ScenarioObject>().tTileType);
+        int index = MMUtils.MatrixIndexesToListIndex(v3CurrentPosition + v3Direction, levelBuilder.GetCurrentLevel().MaxSize);
+        return MMUtils.IsPushableObject(levelBuilder.scenarioObjects[index].GetComponent<ScenarioObject>().tTileType) 
+            && levelBuilder.scenarioObjects[index].GetComponent<MovementObject>().bEnableMovement;
     }
 
     public void RefreshLevelReference(Vector3 v3Direction)
     {
         int iCurrIndex = MMUtils.MatrixIndexesToListIndex(v3TargetPosition, levelBuilder.GetCurrentLevel().MaxSize);
-        int iPrevIndex = MMUtils.MatrixIndexesToListIndex(v3TargetPosition - v3Direction, levelBuilder.GetCurrentLevel().MaxSize);
+        int iPrevIndex = MMUtils.MatrixIndexesToListIndex(v3CurrentPosition, levelBuilder.GetCurrentLevel().MaxSize);
         GameObject goAux = levelBuilder.scenarioObjects[iCurrIndex];
         levelBuilder.scenarioObjects[iCurrIndex] = levelBuilder.scenarioObjects[iPrevIndex];
         levelBuilder.scenarioObjects[iPrevIndex] = goAux;
-
     }
 
     public void Rotate(float fAngle, Vector3 v3Direction)

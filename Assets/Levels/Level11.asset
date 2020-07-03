@@ -23,11 +23,9 @@ MonoBehaviour:
   - {x: -0, y: 0, z: 0}
   - {x: 0, y: 180, z: 0}
   - {x: 0, y: 180, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
   objColor:
   - {r: 0, g: 0, b: 1, a: 1}
   - {r: 0, g: 1, b: 0, a: 1}
   - {r: 0, g: 0, b: 1, a: 1}
-  objMovementEnabled: 0100010101010000
+  objMovementEnabled: 0000010100
   MaxSize: 9
