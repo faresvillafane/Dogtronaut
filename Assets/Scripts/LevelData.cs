@@ -9,6 +9,9 @@ public class LevelData : ScriptableObject
 {
     public int LevelNumber;
     public string levelName;
+    public string description;
+
+    public MMEnums.LevelDifficulty levelDifficulty = MMEnums.LevelDifficulty.TUTORIAL;
 
     [TextArea]
     public string levelBuild;

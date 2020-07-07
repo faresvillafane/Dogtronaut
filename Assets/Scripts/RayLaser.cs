@@ -70,6 +70,8 @@ public class RayLaser : ScenarioObject
 
         Vector3 laserDirection = transform.forward; //direction of the next laser
         Vector3 lastLaserPosition = transform.position; //origin of the next laser
+        //TODO
+        //mLineRenderer.positionCount
 
         mLineRenderer.SetVertexCount(1);
         mLineRenderer.SetPosition(0, transform.position);

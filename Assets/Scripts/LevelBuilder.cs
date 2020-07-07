@@ -17,9 +17,7 @@ public class LevelBuilder : MonoBehaviour
 
     public LevelData[] levels;
 
-    public int iCurrentLevel = 0;
 
-    public GameObject[] scenarioObjects;
     private GameController gameController;
     private UIManager uiManager;
 
@@ -37,8 +35,8 @@ public class LevelBuilder : MonoBehaviour
 
     public void Init()
     {
-        LevelData curLevel = GetCurrentLevel();
-        GenerateBaseLevel(curLevel.levelBuild, curLevel.MaxSize);
+        LevelData curLevel = gameController.GetCurrentLevel();
+        GenerateBaseLevel(curLevel);
         uiManager.ShownMainText(curLevel.levelName);
         gameController.SetLevelStatus(curLevel.levelBuild, curLevel.MaxSize);
     }
@@ -48,21 +46,21 @@ public class LevelBuilder : MonoBehaviour
         MMUtils.DeleteAllChildren(this.transform);
     }
 
-    public void GenerateBaseLevel(string sLevel, int maxSide)
+    public void GenerateBaseLevel(LevelData curLevel)
     {
-        cameraManager.PlaceCamera(maxSide);
+        cameraManager.PlaceCamera(curLevel.MaxSize);
         int iObjectPlacementNumber = 0;
         int iObjectMovementNumber = 0;
         int iObjectColorNumber = 0;
-        string[] sLevelObjects = sLevel.Split(MMConstants.LEVEL_SEPARATOR);
-        scenarioObjects = new GameObject[sLevelObjects.Length];
-        for(int x = 0; x < maxSide; x++)
+        string[] sLevelObjects = curLevel.levelBuild.Split(MMConstants.LEVEL_SEPARATOR);
+        gameController.scenarioObjects = new GameObject[sLevelObjects.Length];
+        for(int x = 0; x < curLevel.MaxSize; x++)
         {
-            for (int z = 0; z < maxSide; z++)
+            for (int z = 0; z < curLevel.MaxSize; z++)
             {
                 GameObject goNewTile = Instantiate(goTile, new Vector3(x, 0.4f, z), Quaternion.identity);
                 goNewTile.transform.SetParent(this.transform);
-                int index = MMUtils.ArrayIndexesToListIndex(x, z, maxSide);
+                int index = MMUtils.MatrixIndexesToListIndex(x, z, curLevel.MaxSize);
                 if ((MMEnums.TileType)int.Parse(sLevelObjects[index]) == MMEnums.TileType.NONE)
                 {
                     goNewTile.SetActive(false);
@@ -102,41 +100,41 @@ public class LevelBuilder : MonoBehaviour
                 {
                     GameObject goNewObj = Instantiate(goToInstantiate, new Vector3(x, 1, z) + goToInstantiate.GetComponent<ScenarioObject>().v3Offset, Quaternion.identity);
                     goNewObj.transform.SetParent(this.transform);
-                    goNewObj.GetComponent<ScenarioObject>().SetLevelReference(this);
-                    scenarioObjects[index] = goNewObj;
+                    goNewObj.GetComponent<ScenarioObject>().SetLevelReference(gameController);
+                    gameController.scenarioObjects[index] = goNewObj;
 
                     if (goToInstantiate != goRocks && goToInstantiate != goBigRock)
                     {
-                        goNewObj.transform.rotation = Quaternion.Euler(GetCurrentLevel().objRotation[iObjectPlacementNumber]);
+                        goNewObj.transform.rotation = Quaternion.Euler(curLevel.objRotation[iObjectPlacementNumber]);
                         goNewObj.name += iObjectPlacementNumber;
                         iObjectPlacementNumber++;
                         if(goToInstantiate == goLaser)
                         {
-                            goNewObj.GetComponent<RayLaser>().UpdateRayColor(GetCurrentLevel().objColor[iObjectColorNumber]);
+                            goNewObj.GetComponent<RayLaser>().UpdateRayColor(curLevel.objColor[iObjectColorNumber]);
                             iObjectColorNumber++;
 
                         }
                         else if (goToInstantiate == goReceiver)
                         {
-                            goNewObj.GetComponent<Receiver>().UpdateColorSolution(GetCurrentLevel().objColor[iObjectColorNumber]);
+                            goNewObj.GetComponent<Receiver>().UpdateColorSolution(curLevel.objColor[iObjectColorNumber]);
                             iObjectColorNumber++;
                         }
                     }
 
                     if (MMUtils.IsPushableObject(goToInstantiate.GetComponent<ScenarioObject>().tTileType))
                     {
-                        goNewObj.GetComponent<MovementObject>().bEnableMovement = GetCurrentLevel().objMovementEnabled[iObjectMovementNumber];
+                        goNewObj.GetComponent<MovementObject>().bEnableMovement = curLevel.objMovementEnabled[iObjectMovementNumber];
                         iObjectMovementNumber++;
                     }
 
                 }
                 else if(!goNewTile.activeInHierarchy)
                 {
-                    scenarioObjects[index] = goNewTile;
+                    gameController.scenarioObjects[index] = goNewTile;
                 }
                 else
                 {
-                    scenarioObjects[index] = goNewTile;
+                    gameController.scenarioObjects[index] = goNewTile;
                 }
 
             }
@@ -144,14 +142,6 @@ public class LevelBuilder : MonoBehaviour
         }
     }
 
-    public LevelData GetCurrentLevel()
-    {
-        return levels[iCurrentLevel];
-    }
 
-    public void NextLevel()
-    {
-        iCurrentLevel = (iCurrentLevel == levels.Length - 1) ? iCurrentLevel : iCurrentLevel + 1;
-    }
 
 }

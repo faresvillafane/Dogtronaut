@@ -10,6 +10,10 @@ public class Splitter : MovementObject
     private const int MAX_SPLITTER = 10;
     // Update is called once per frame
     private bool bDeletedThisRound = false;
+
+    //TODO
+    private bool bInvertRays = false;
+
     new void Update()
     {
         base.Update();

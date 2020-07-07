@@ -37,6 +37,13 @@ public class UIManager : MonoBehaviour
                 
         
     }
+
+    public void DisableAllMenus()
+    {
+        DisableInteractionText();
+        DisableMenu();
+    }
+
     public void EnableInteractionText(string sText)
     {
         SetActiveInteraction(sText, true);

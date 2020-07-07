@@ -135,8 +135,8 @@ public class MovementObject : ScenarioObject
                 
                 else if (ValidatePush(v3Direction))
                 {
-                    int index = MMUtils.MatrixIndexesToListIndex(v3CurrentPosition + v3Direction, levelBuilder.GetCurrentLevel().MaxSize);
-                    MovementObject mvObjectToMove = levelBuilder.scenarioObjects[index].GetComponent<MovementObject>();
+                    int index = MMUtils.MatrixIndexesToListIndex(v3CurrentPosition + v3Direction, gameController.GetCurrentLevel().MaxSize);
+                    MovementObject mvObjectToMove = gameController.scenarioObjects[index].GetComponent<MovementObject>();
                     if (mvObjectToMove.bEnableMovement)
                     {
                         StartCoroutine(mvObjectToMove.Movequeue(v3Direction));
@@ -155,31 +155,31 @@ public class MovementObject : ScenarioObject
 
     protected GameObject GetLookingAtObject(Vector3 v3LookDirection)
     {
-        int index = MMUtils.MatrixIndexesToListIndex(v3CurrentPosition + v3LookDirection, levelBuilder.GetCurrentLevel().MaxSize);
-        return levelBuilder.scenarioObjects[index];
+        int index = MMUtils.MatrixIndexesToListIndex(v3CurrentPosition + v3LookDirection, gameController.GetCurrentLevel().MaxSize);
+        return gameController.scenarioObjects[index];
 
     }
 
     private bool ValidateMove(Vector3 v3Direction)
     {
-        int index = MMUtils.MatrixIndexesToListIndex(v3CurrentPosition + v3Direction, levelBuilder.GetCurrentLevel().MaxSize);
-        return MMUtils.IsWalkableObject(levelBuilder.scenarioObjects[index].GetComponent<ScenarioObject>().tTileType) && levelBuilder.scenarioObjects[index].activeInHierarchy;
+        int index = MMUtils.MatrixIndexesToListIndex(v3CurrentPosition + v3Direction, gameController.GetCurrentLevel().MaxSize);
+        return MMUtils.IsWalkableObject(gameController.scenarioObjects[index].GetComponent<ScenarioObject>().tTileType) && gameController.scenarioObjects[index].activeInHierarchy;
     }
 
     private bool ValidatePush(Vector3 v3Direction)
     {
-        int index = MMUtils.MatrixIndexesToListIndex(v3CurrentPosition + v3Direction, levelBuilder.GetCurrentLevel().MaxSize);
-        return MMUtils.IsPushableObject(levelBuilder.scenarioObjects[index].GetComponent<ScenarioObject>().tTileType) 
-            && levelBuilder.scenarioObjects[index].GetComponent<MovementObject>().bEnableMovement;
+        int index = MMUtils.MatrixIndexesToListIndex(v3CurrentPosition + v3Direction, gameController.GetCurrentLevel().MaxSize);
+        return MMUtils.IsPushableObject(gameController.scenarioObjects[index].GetComponent<ScenarioObject>().tTileType) 
+            && gameController.scenarioObjects[index].GetComponent<MovementObject>().bEnableMovement;
     }
 
     public void RefreshLevelReference(Vector3 v3Direction)
     {
-        int iCurrIndex = MMUtils.MatrixIndexesToListIndex(v3TargetPosition, levelBuilder.GetCurrentLevel().MaxSize);
-        int iPrevIndex = MMUtils.MatrixIndexesToListIndex(v3CurrentPosition, levelBuilder.GetCurrentLevel().MaxSize);
-        GameObject goAux = levelBuilder.scenarioObjects[iCurrIndex];
-        levelBuilder.scenarioObjects[iCurrIndex] = levelBuilder.scenarioObjects[iPrevIndex];
-        levelBuilder.scenarioObjects[iPrevIndex] = goAux;
+        int iCurrIndex = MMUtils.MatrixIndexesToListIndex(v3TargetPosition, gameController.GetCurrentLevel().MaxSize);
+        int iPrevIndex = MMUtils.MatrixIndexesToListIndex(v3CurrentPosition, gameController.GetCurrentLevel().MaxSize);
+        GameObject goAux = gameController.scenarioObjects[iCurrIndex];
+        gameController.scenarioObjects[iCurrIndex] = gameController.scenarioObjects[iPrevIndex];
+        gameController.scenarioObjects[iPrevIndex] = goAux;
     }
 
     public void Rotate(float fAngle, Vector3 v3Direction)

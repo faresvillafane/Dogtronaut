@@ -12,7 +12,7 @@ public class ScenarioObject : MonoBehaviour
     public string sInteractionText = "";
 
     public Vector3 v3Offset = Vector3.zero;
-    protected LevelBuilder levelBuilder;
+    protected GameController gameController;
 
     public bool bEnableRandomYRotation = false;
     public bool bFree = true;
@@ -31,9 +31,9 @@ public class ScenarioObject : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, fRandRot * iStepRotation, 0);
         }
     }
-    public void SetLevelReference(LevelBuilder lb)
+    public void SetLevelReference(GameController gc)
     {
-        levelBuilder = lb;
+        gameController = gc;
     }
 
     public bool IsInteractable()

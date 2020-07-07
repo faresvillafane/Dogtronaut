@@ -13,6 +13,8 @@ TagManager:
   - Canvas
   - Merger
   - Tile
+  - LevelSelect
+  - GenericRayKiller
   layers:
   - Default
   - TransparentFX

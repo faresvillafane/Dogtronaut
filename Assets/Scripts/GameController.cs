@@ -22,19 +22,26 @@ public class GameController : MonoBehaviour
 
     public MovementObject[] mo;
 
+    public int iCurrentLevel = 0;
 
-    // Start is called before the first frame update
+    public GameObject[] scenarioObjects;
+
+    public bool bInLevel = false;
+
+    private MenuController mc;
+
     void Start()
     {
         canvas.SetActive(true);
         levelBuilder = GetComponent<LevelBuilder>();
         uiManager = GetComponent<UIManager>();
-        Init();
+        mc = GetComponent<MenuController>();
     }
 
     public void Init()
     {
         levelBuilder.Init();
+        bInLevel = true;
         uiManager.EnableMenu(MMConstants.LANG_MENU);
         bToNextLevel = false;
         bIsComplete = false;
@@ -50,47 +57,57 @@ public class GameController : MonoBehaviour
         {
             for (int z = 0; z < iLevelDim; z++)
             {
-                int index = MMUtils.ArrayIndexesToListIndex(x,z,iLevelDim);
+                int index = MMUtils.MatrixIndexesToListIndex(x,z,iLevelDim);
                 iLevelStatus[x, z] = int.Parse(sLevelArray[index]);
             }
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        fCurrentTime += Time.deltaTime;
-        if (!bIsComplete && fCurrentTime >= CHECK_WIN_CONDITION)
+        if (bInLevel)
         {
-            fCurrentTime = 0;
-            bool bIsCompletePrev = CheckLevelCompletion();
-            bIsComplete = bIsCompletePrev;
+            fCurrentTime += Time.deltaTime;
+            if (!bIsComplete && fCurrentTime >= CHECK_WIN_CONDITION)
+            {
+                fCurrentTime = 0;
+                bool bIsCompletePrev = CheckLevelCompletion();
+                bIsComplete = bIsCompletePrev;
+            }
+            else if (!bToNextLevel && bIsComplete)
+            {
+
+                bToNextLevel = true;
+                uiManager.ShownMainText(MMConstants.LANG_LEVEL_COMPLETE);
+                uiManager.DisableMenu();
+
+                StartCoroutine(PrepareNextLevel());
+            }
+
+            if (Input.GetButton(MMConstants.INPUT_BUMPER_LEFT))
+            {
+                ResetLevel();
+            }
         }
-        else if (!bToNextLevel && bIsComplete)
-        {
-
-            bToNextLevel = true;
-            uiManager.ShownMainText(MMConstants.LANG_LEVEL_COMPLETE);
-            uiManager.DisableMenu();
-
-            StartCoroutine(NextLevel());
-        }
-
-        if (Input.GetButton(MMConstants.INPUT_BUMPER_LEFT))
-        {
-            ResetLevel();
-        }
-
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Application.Quit();
+            if (bInLevel)
+            {
+                bInLevel = false;
+                uiManager.DisableAllMenus();
+                mc.Init();
+            }
+            else
+            {
+                Application.Quit();
+            }
         }
     }
 
     private bool CheckLevelCompletion()
     {
         bool bIsComplete = true;
-        for(int i = 0; i < receivers.Length; i++)
+        for(int i = 0; receivers != null && i < receivers.Length; i++)
         {
             bIsComplete &= receivers[i].GetComponentInParent<Receiver>().IsSolved();
         }
@@ -98,11 +115,11 @@ public class GameController : MonoBehaviour
         return bIsComplete;
     }
 
-    public IEnumerator NextLevel()
+    public IEnumerator PrepareNextLevel()
     {
         yield return new WaitForSeconds(2f);
         levelBuilder.DeleteLevel();
-        levelBuilder.NextLevel();
+        NextLevel();
         Init();
 
     }
@@ -112,6 +129,14 @@ public class GameController : MonoBehaviour
         levelBuilder.DeleteLevel();
         Init();
     }
+
+    public void StartLevel(int iLvl)
+    {
+        levelBuilder.DeleteLevel();
+        iCurrentLevel = iLvl;
+        Init();
+    }
+
     public bool FinishedMovingAllObjects()
     {
         bool bRes = true;
@@ -120,5 +145,15 @@ public class GameController : MonoBehaviour
             bRes = mo[i].FinishedMoving();
         }
         return bRes;
+    }
+
+    public LevelData GetCurrentLevel()
+    {
+        return levelBuilder.levels[iCurrentLevel];
+    }
+
+    public void NextLevel()
+    {
+        iCurrentLevel = (iCurrentLevel == levelBuilder.levels.Length - 1) ? iCurrentLevel : iCurrentLevel + 1;
     }
 }

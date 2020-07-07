@@ -15,6 +15,7 @@ public class MMConstants
     public const string TAG_WALL            = "Wall";
     public const string TAG_GAME_CONTROLLER = "GameController";
     public const string TAG_CANVAS          = "Canvas";
+    public const string TAG_LEVEL_SELECT    = "LevelSelect";
 
     public const string INPUT_HORIZONTAL    = "Horizontal";
     public const string INPUT_VERTICAL      = "Vertical";

@@ -56,7 +56,7 @@ public class LevelEditor : MonoBehaviour
                 GameObject goNewEditorTile = Instantiate(prefEditorTile, new Vector3(x, 0.4f, z), Quaternion.identity);
                 goNewEditorTile.transform.SetParent(tContainer);
 
-                int index = MMUtils.ArrayIndexesToListIndex(x, z, iTiles);
+                int index = MMUtils.MatrixIndexesToListIndex(x, z, iTiles);
                 tiles[index] = goNewEditorTile;
             }
 

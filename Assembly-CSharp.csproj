@@ -79,6 +79,7 @@
     <Compile Include="Assets\Scripts\MMConstants.cs" />
     <Compile Include="Assets\Scripts\MMEnums.cs" />
     <Compile Include="Assets\Scripts\MMUtils.cs" />
+    <Compile Include="Assets\Scripts\MenuController.cs" />
     <Compile Include="Assets\Scripts\Merger.cs" />
     <Compile Include="Assets\Scripts\Mirror.cs" />
     <Compile Include="Assets\Scripts\MovementObject.cs" />

@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelNumber: 0
   levelName: Level5
+  description: 
+  levelDifficulty: 1
   levelBuild: 5,5,5,5,5,5,5,1,3,0,0,0,3,5,3,3,0,0,0,0,5,5,0,8,0,3,0,5,3,0,5,0,3,0,5,5,0,8,0,6,0,5,5,2,8,5,5,5,5
   objRotation:
   - {x: -0, y: 0, z: 0}

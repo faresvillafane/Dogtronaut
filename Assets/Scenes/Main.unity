@@ -180,7 +180,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 207778218}
-  m_LocalRotation: {x: -0.30070576, y: -0, z: -0, w: 0.953717}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -751,6 +751,7 @@ GameObject:
   - component: {fileID: 831092399}
   - component: {fileID: 831092400}
   - component: {fileID: 831092401}
+  - component: {fileID: 831092402}
   m_Layer: 0
   m_Name: GameController
   m_TagString: GameController
@@ -798,8 +799,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a991d77d6a1c9934c8b2bd08f17d51f9, type: 2}
   - {fileID: 11400000, guid: e40ff29760ad45446b1fb23fb82c69bb, type: 2}
   - {fileID: 11400000, guid: d7f1f682629acf545b2688ea518c690b, type: 2}
-  iCurrentLevel: 0
-  scenarioObjects: []
   cameraManager: {fileID: 963194229}
 --- !u!4 &831092398
 Transform:
@@ -808,7 +807,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 831092396}
-  m_LocalRotation: {x: -0.30070576, y: -0, z: -0, w: 0.953717}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -842,6 +841,9 @@ MonoBehaviour:
   bIsComplete: 0
   canvas: {fileID: 1522430329}
   mo: []
+  iCurrentLevel: 0
+  scenarioObjects: []
+  bInLevel: 0
 --- !u!114 &831092401
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -857,6 +859,36 @@ MonoBehaviour:
   tmpMainText: {fileID: 1207138941}
   tmpInteractionText: {fileID: 812051450}
   tmpMenuText: {fileID: 374286857}
+--- !u!114 &831092402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 831092396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 712333ae4da041f4a9fbb2c2235cd33a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefLevelSelect: {fileID: 4621158150757350139, guid: 98d78b752f8b51a458c3dcc4b1c4d563,
+    type: 3}
+  goCamera: {fileID: 963194225}
+  clrDifficulty:
+  - serializedVersion: 2
+    rgba: 4294940416
+  - serializedVersion: 2
+    rgba: 4284350208
+  - serializedVersion: 2
+    rgba: 4278255607
+  - serializedVersion: 2
+    rgba: 4278196223
+  - serializedVersion: 2
+    rgba: 4294901919
+  clrToMerge:
+  - {r: 0, g: 0, b: 1, a: 1}
+  - {r: 1, g: 1, b: 0, a: 1}
+  clrSol: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -935,7 +967,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.42261827, y: 0, z: 0, w: 0.9063079}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 10, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
