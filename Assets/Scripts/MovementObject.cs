@@ -5,6 +5,7 @@ using UnityEngine;
 public class MovementObject : ScenarioObject
 {
     private Quaternion qTargetRotation = Quaternion.Euler(Vector3.zero);
+    private Quaternion qCurrentRotation = Quaternion.Euler(Vector3.zero);
 
     private Vector3 v3TargetPosition;
     private Vector3 v3CurrentPosition;
@@ -22,11 +23,13 @@ public class MovementObject : ScenarioObject
 
     public GameObject[] goMovementObjects;
 
+    public List<UndoData> undoDatas = new List<UndoData>();
+
 
     protected new void Start()
     {
         base.Start();
-        qTargetRotation = transform.rotation;
+        qCurrentRotation = qTargetRotation = transform.rotation;
         v3CurrentPosition = v3TargetPosition = transform.position;
         SetEnableMovement();
     }
@@ -89,6 +92,8 @@ public class MovementObject : ScenarioObject
         else
         {
             transform.rotation = GetTargetRotation();
+            qCurrentRotation = GetTargetRotation();
+
             return true;
         }
 
@@ -123,6 +128,7 @@ public class MovementObject : ScenarioObject
                     this.transform.rotation = Quaternion.Euler(Vector3.up * 270);
                 }
 
+                qCurrentRotation = this.transform.rotation;
             }
             else
             {
@@ -184,6 +190,7 @@ public class MovementObject : ScenarioObject
 
     public void Rotate(float fAngle, Vector3 v3Direction)
     {
+
         if (bEnableRotation)
         {
             SetTargetRotation(GetTargetRotation() * Quaternion.AngleAxis(fAngle, v3Direction));
@@ -227,5 +234,25 @@ public class MovementObject : ScenarioObject
     public void SetTargetPosition(Vector3 v3NewTargetPosition)
     {
         v3TargetPosition = v3NewTargetPosition;
+    }
+
+    public void SaveUndoData()
+    {
+        UndoData newUndoData = new UndoData(v3CurrentPosition, qCurrentRotation);
+        undoDatas.Add(newUndoData);
+    }
+
+    public void LoadLastUndoData()
+    {
+        if (undoDatas.Count > 1)
+        {
+            undoDatas.RemoveAt(undoDatas.Count - 1);
+            v3TargetPosition = undoDatas[undoDatas.Count - 1].v3Position;
+            qTargetRotation = undoDatas[undoDatas.Count - 1].qRotation;
+            Vector3 v3Direction = v3CurrentPosition - v3TargetPosition;
+            RefreshLevelReference(v3Direction);
+            bfinishedMoving = false;
+            bFinishedRotating = false;
+        }
     }
 }

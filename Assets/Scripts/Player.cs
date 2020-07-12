@@ -17,10 +17,6 @@ public class Player : MovementObject
     {
         uiManager = GameObject.FindGameObjectWithTag(MMConstants.TAG_GAME_CONTROLLER).GetComponent<UIManager>();
         gc = GameObject.FindGameObjectWithTag(MMConstants.TAG_GAME_CONTROLLER).GetComponent<GameController>();
-
-        
-
-
     }
     new void Start()
     {
@@ -42,21 +38,28 @@ public class Player : MovementObject
             {
                 SetButtonCooldown();
                 Move(Vector3.right);
+                gc.SaveUndoDatas();
+
             }
             else if(Input.GetAxis(MMConstants.INPUT_HORIZONTAL) < 0)
             {
                 Move(Vector3.left);
                 SetButtonCooldown();
+                gc.SaveUndoDatas();
+
             }
             else if (Input.GetAxis(MMConstants.INPUT_VERTICAL) > 0)
             {
                 Move(Vector3.forward);
                 SetButtonCooldown();
+                gc.SaveUndoDatas();
+
             }
             else if (Input.GetAxis(MMConstants.INPUT_VERTICAL) < 0)
             {
                 Move(Vector3.back);
                 SetButtonCooldown();
+                gc.SaveUndoDatas();
             }
 
             GameObject soLookingAt = GetLookingAtObject(v3LookDirection);
@@ -66,6 +69,8 @@ public class Player : MovementObject
                 {
                     soLookingAt.GetComponent<ScenarioObject>().Interact((Input.GetAxis(MMConstants.INPUT_TRIGGERS) > 0), (Input.GetAxis(MMConstants.INPUT_TRIGGERS) < 0));
                     SetButtonCooldown();
+                    gc.SaveUndoDatas();
+
                 }
                 uiManager.EnableInteractionText(soLookingAt.GetComponent<ScenarioObject>().sInteractionText);
             }

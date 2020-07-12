@@ -26,7 +26,8 @@ public class MMConstants
 
     public const string LANG_LEVEL_COMPLETE      = "Level Completed!";
     public const string LANG_MENU                = "R --> Restart level" +
-                                                    " ESC --> EXIT";
+                                                    " ESC --> EXIT       " +
+                                                    "U --> UNDO";
 
     public const char LEVEL_SEPARATOR       = ',';
 

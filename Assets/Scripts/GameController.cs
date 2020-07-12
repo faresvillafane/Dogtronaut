@@ -46,7 +46,7 @@ public class GameController : MonoBehaviour
         bToNextLevel = false;
         bIsComplete = false;
         receivers = GameObject.FindGameObjectsWithTag(MMConstants.TAG_RECEIVER);
-        mo = GetComponentsInChildren<MovementObject>();
+        mo = GetComponentsInChildren<MovementObject>(); 
     }
 
     public void SetLevelStatus(string sLevel, int iLevelDim)
@@ -84,9 +84,14 @@ public class GameController : MonoBehaviour
                 StartCoroutine(PrepareNextLevel());
             }
 
-            if (Input.GetButton(MMConstants.INPUT_BUMPER_LEFT))
+            if (Input.GetButtonDown(MMConstants.INPUT_BUMPER_LEFT))
             {
                 ResetLevel();
+            }
+
+            if (Input.GetKeyDown(KeyCode.U))
+            {
+                Undo();
             }
         }
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -155,5 +160,25 @@ public class GameController : MonoBehaviour
     public void NextLevel()
     {
         iCurrentLevel = (iCurrentLevel == levelBuilder.levels.Length - 1) ? iCurrentLevel : iCurrentLevel + 1;
+    }
+    public void SaveUndoDatas()
+    {
+        for (int i = 0; i < mo.Length ; i++)
+        {
+            print(mo[i].transform.name);
+            mo[i].SaveUndoData(); 
+        }
+    }
+
+    
+
+    public void Undo()
+    {
+        for (int i = 0; i < mo.Length ; i++)
+        {
+            print(mo[i].transform.name);
+
+            mo[i].LoadLastUndoData();
+        }
     }
 }
