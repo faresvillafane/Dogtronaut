@@ -30,6 +30,9 @@ public class GameController : MonoBehaviour
 
     private MenuController mc;
 
+    private const float REGISTER_PRESS_IN = .15f;
+    private float fButtonPressTime = 0;
+
     void Start()
     {
         canvas.SetActive(true);
@@ -46,7 +49,8 @@ public class GameController : MonoBehaviour
         bToNextLevel = false;
         bIsComplete = false;
         receivers = GameObject.FindGameObjectsWithTag(MMConstants.TAG_RECEIVER);
-        mo = GetComponentsInChildren<MovementObject>(); 
+        mo = GetComponentsInChildren<MovementObject>();
+        SaveUndoDatas();
     }
 
     public void SetLevelStatus(string sLevel, int iLevelDim)
@@ -84,14 +88,24 @@ public class GameController : MonoBehaviour
                 StartCoroutine(PrepareNextLevel());
             }
 
-            if (Input.GetButtonDown(MMConstants.INPUT_BUMPER_LEFT))
+            if (Input.GetButton(MMConstants.INPUT_BUMPER_LEFT))
             {
-                ResetLevel();
+                fButtonPressTime += Time.deltaTime;
+                if(fButtonPressTime >= REGISTER_PRESS_IN)
+                {
+                    fButtonPressTime = 0;
+                    ResetLevel();
+                }
             }
 
-            if (Input.GetKeyDown(KeyCode.U))
+            if (Input.GetKey(KeyCode.U))
             {
-                Undo();
+                fButtonPressTime += Time.deltaTime;
+                if (fButtonPressTime >= REGISTER_PRESS_IN)
+                {
+                    fButtonPressTime = 0;
+                    Undo();
+                }
             }
         }
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -165,8 +179,11 @@ public class GameController : MonoBehaviour
     {
         for (int i = 0; i < mo.Length ; i++)
         {
-            print(mo[i].transform.name);
-            mo[i].SaveUndoData(); 
+            //if (mo[i].name.Contains("Mir"))
+            {
+                //print(mo[i].name);
+                mo[i].SaveUndoData(); 
+            }
         }
     }
 
@@ -176,9 +193,11 @@ public class GameController : MonoBehaviour
     {
         for (int i = 0; i < mo.Length ; i++)
         {
-            print(mo[i].transform.name);
-
-            mo[i].LoadLastUndoData();
+            //if (mo[i].name.Contains("Mir"))
+            {
+                //print(mo[i].name);
+                mo[i].LoadLastUndoData();
+            }
         }
     }
 }

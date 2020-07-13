@@ -246,11 +246,18 @@ public class MovementObject : ScenarioObject
     {
         if (undoDatas.Count > 1)
         {
-            undoDatas.RemoveAt(undoDatas.Count - 1);
             v3TargetPosition = undoDatas[undoDatas.Count - 1].v3Position;
             qTargetRotation = undoDatas[undoDatas.Count - 1].qRotation;
+
             Vector3 v3Direction = v3CurrentPosition - v3TargetPosition;
-            RefreshLevelReference(v3Direction);
+
+            undoDatas.RemoveAt(undoDatas.Count - 1);
+
+            //if (v3Direction != Vector3.zero)
+            {
+                RefreshLevelReference(v3Direction);
+                v3LookDirection = v3Direction;
+            }
             bfinishedMoving = false;
             bFinishedRotating = false;
         }
