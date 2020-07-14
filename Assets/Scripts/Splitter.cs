@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Splitter : MovementObject
@@ -11,7 +12,6 @@ public class Splitter : MovementObject
     // Update is called once per frame
     private bool bDeletedThisRound = false;
 
-    //TODO
     private bool bInvertRays = false;
 
     new void Update()
@@ -51,6 +51,7 @@ public class Splitter : MovementObject
 
     public void MirrorSolutions()
     {
+        bInvertRays = !bInvertRays;
         for (int i = 0; i < ssSpliterSolutions.Count; i++)
         {
             Quaternion qAuxRotation = ssSpliterSolutions[i].tLasers[0].transform.rotation;
@@ -81,6 +82,11 @@ public class Splitter : MovementObject
     public void AddSolution(SplitterSolution ssNewSpliterSolution, Vector3 v3PrevDirection, GameObject goLaser)
     {
         Color32[] clrsToSplit = MMUtils.ColorSplitter(ssNewSpliterSolution.clrLaserColor);
+
+        if (bInvertRays)
+        {
+            clrsToSplit.Reverse();
+        }
 
         ssNewSpliterSolution.tLasers = new Transform[clrsToSplit.Length];
 

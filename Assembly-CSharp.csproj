@@ -82,6 +82,7 @@
     <Compile Include="Assets\Scripts\MMUtils.cs" />
     <Compile Include="Assets\Scripts\MenuController.cs" />
     <Compile Include="Assets\Scripts\Merger.cs" />
+    <Compile Include="Assets\Scripts\MergerSolution.cs" />
     <Compile Include="Assets\Scripts\Mirror.cs" />
     <Compile Include="Assets\Scripts\MovementObject.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />

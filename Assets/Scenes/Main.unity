@@ -489,7 +489,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  lvlExit: {fileID: 11400000, guid: 4eb243cafe578c24d88e6742bb21e0d4, type: 2}
+  lvlExit: {fileID: 11400000, guid: c1382a34b628d9c48af16697de373ffb, type: 2}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -799,6 +799,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a991d77d6a1c9934c8b2bd08f17d51f9, type: 2}
   - {fileID: 11400000, guid: e40ff29760ad45446b1fb23fb82c69bb, type: 2}
   - {fileID: 11400000, guid: d7f1f682629acf545b2688ea518c690b, type: 2}
+  - {fileID: 11400000, guid: c1382a34b628d9c48af16697de373ffb, type: 2}
   cameraManager: {fileID: 963194229}
 --- !u!4 &831092398
 Transform:
@@ -885,10 +886,6 @@ MonoBehaviour:
     rgba: 4278196223
   - serializedVersion: 2
     rgba: 4294901919
-  clrToMerge:
-  - {r: 0, g: 0, b: 1, a: 1}
-  - {r: 1, g: 1, b: 0, a: 1}
-  clrSol: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0

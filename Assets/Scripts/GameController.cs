@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -30,7 +31,7 @@ public class GameController : MonoBehaviour
 
     private MenuController mc;
 
-    private const float REGISTER_PRESS_IN = .15f;
+    private const float REGISTER_PRESS_IN = .25f;
     private float fButtonPressTime = 0;
 
     void Start()
@@ -104,7 +105,7 @@ public class GameController : MonoBehaviour
                 if (fButtonPressTime >= REGISTER_PRESS_IN)
                 {
                     fButtonPressTime = 0;
-                    Undo();
+                    StartCoroutine(Undo());
                 }
             }
         }
@@ -182,6 +183,7 @@ public class GameController : MonoBehaviour
             //if (mo[i].name.Contains("Mir"))
             {
                 //print(mo[i].name);
+                
                 mo[i].SaveUndoData(); 
             }
         }
@@ -189,14 +191,19 @@ public class GameController : MonoBehaviour
 
     
 
-    public void Undo()
+    public IEnumerator Undo()
     {
+        Player player = GetComponentInChildren<Player>();
+        mo = mo.OrderBy((d) => (d.transform.position - player.transform.position).sqrMagnitude).ToArray();
+
         for (int i = 0; i < mo.Length ; i++)
         {
             //if (mo[i].name.Contains("Mir"))
             {
                 //print(mo[i].name);
+                //ORDENAR POR DISTANCIA A DOG
                 mo[i].LoadLastUndoData();
+                yield return new WaitForEndOfFrame();
             }
         }
     }

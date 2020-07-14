@@ -18,12 +18,9 @@ public class MenuController : MonoBehaviour
 
     public Color32[] clrDifficulty;
 
-    public Color[] clrToMerge;
-    public Color clrSol;
     // Start is called before the first frame update
     void Start()
     {
-        clrSol = MMUtils.ColorMergeFormula(clrToMerge);
         lb = GetComponent<LevelBuilder>();
         v3CameraStartPos = goCamera.transform.position;
         qCameraStartRot = goCamera.transform.rotation;

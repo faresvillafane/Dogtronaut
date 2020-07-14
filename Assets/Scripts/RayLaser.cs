@@ -112,7 +112,9 @@ public class RayLaser : ScenarioObject
                 }
                 else if (hit.transform.gameObject.tag == MMConstants.TAG_MERGER)
                 {
+                    MergerSolution ms = new MergerSolution(clrLaser, laserDirection);
 
+                    hit.transform.GetComponent<Merger>().TryToMerge(ms, prevDirection, this.gameObject);
                     loopActive = false;
                 }
                 else if (IsRayKiller(hit.transform.gameObject.tag))

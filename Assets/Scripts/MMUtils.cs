@@ -143,38 +143,4 @@ public class MMUtils : MonoBehaviour
 
     }
 
-
-    public static Color ColorMergeFormula(Color[] colorsToBlend)
-    {
-        float h, s, v;
-        float h2, s2, v2;
-        float hSol;
-        Color.RGBToHSV(colorsToBlend[0], out h, out s, out v);
-        Color.RGBToHSV(colorsToBlend[1], out h2, out s2, out v2);
-
-        hSol = h / 2 + h2 / 2;
-
-        Color r = Color.HSVToRGB(hSol,s,v);
-
-        return r;
-
-    }
-
-    public static float Average(float f1, float f2)
-    {
-        return (f1 + f2) / 2;
-    }
-
-    public static float BlendChannels(float f1,float f2)
-    {
-        return Mathf.Sqrt((1 - .5f) * Mathf.Pow(f1, 2) + .5f * Mathf.Pow(f2, 2));
-    }
-    /*
-    r = new Color();
-    r.a = 1 - (1 - fg.a) * (1 - bg.a);
-        if (r.a< 1.0e-6) return r; // Fully transparent -- R,G,B not important
-        r.r = fg.r* fg.a / r.a + bg.r* bg.a* (1 - fg.a) / r.a;
-        r.g = fg.g* fg.a / r.a + bg.g* bg.a* (1 - fg.a) / r.a;
-        r.b = fg.b* fg.a / r.a + bg.b* bg.a* (1 - fg.a) / r.a;
-        */
 }
