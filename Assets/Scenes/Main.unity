@@ -402,7 +402,7 @@ MonoBehaviour:
     type: 3}
   prefCharacter: {fileID: 2707489587065886292, guid: 7dfb4114a8587f64facca8fb8bd0088a,
     type: 3}
-  prefMerger: {fileID: 2687986514822474360, guid: 5ce47106f72c7e74a94546669060040d,
+  prefMerger: {fileID: 3662495382409734450, guid: 7d39aa595dbbb8f40a10ee63d8bcf18f,
     type: 3}
   prefBigRock: {fileID: 1882195935702481946, guid: b05b681554434174fabd9e846480384c,
     type: 3}
@@ -782,7 +782,7 @@ MonoBehaviour:
   goLaser: {fileID: 3903469321133916168, guid: fcd4da5b96ee8e04bb4049ae6d39176e, type: 3}
   goCharacter: {fileID: 2707489587065886292, guid: 7dfb4114a8587f64facca8fb8bd0088a,
     type: 3}
-  goMerger: {fileID: 2687986514822474360, guid: 5ce47106f72c7e74a94546669060040d,
+  goMerger: {fileID: 3662495382409734450, guid: 7d39aa595dbbb8f40a10ee63d8bcf18f,
     type: 3}
   goBigRock: {fileID: 1882195935702481946, guid: b05b681554434174fabd9e846480384c,
     type: 3}

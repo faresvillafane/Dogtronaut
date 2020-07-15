@@ -8,39 +8,38 @@ public class Merger : MovementObject
     private List<MergerSolution> msMergerSolutions = new List<MergerSolution>();
     private const int MAX_MERGER = 2;
 
-    private bool bIsMerging = false;
-    public Color32 clrMerge1 = MMConstants.RED;
-    public Color32 clrMerge2 = MMConstants.RED;
+    private const float UNMERGE_EVERY_SEC = .1f;
 
-    public Vector3 v3Ray1Direction = Vector3.forward;
-    public Vector3 v3Ray2Direction = Vector3.forward;
-
-    private const float UNMERGE_EVERY_SEC = .01f;
-
-    private float fTimeSinceLastMerge = 0;
-
-    private bool bReceivingRay1 = false;
-    private bool bReceivingRay2 = false;
+    public GameObject mergedLaser;
 
     // Update is called once per frame
-    private new void Update()
+    new void Update()
     {
         base.Update();
-        if (bIsMerging)
+        if (msMergerSolutions.Count > 0)
         {
-            if (fTimeSinceLastMerge >= UNMERGE_EVERY_SEC)
-            {
-                Unmerge();
-            }
-            fTimeSinceLastMerge += Time.deltaTime;
-
+            CheckAndRemoveForPastSplits();
         }
-
     }
-
-    public void Unmerge()
+    public override void Interact(bool bBumperRight, bool bBumperLeft)
     {
-
+        base.Interact(bBumperRight, bBumperLeft);
+        Rotate90D(bBumperRight);
+    }
+    private void CheckAndRemoveForPastSplits()
+    {
+        bool bDeletedThisRound = false;
+        for (int i = 0; i < msMergerSolutions.Count && !bDeletedThisRound; i++)//  SplitterSolution ss in ssSpliterSolutions)
+        {
+            msMergerSolutions[i].fTimeSinceLastSolve += Time.deltaTime;
+            if (msMergerSolutions[i].fTimeSinceLastSolve >= UNMERGE_EVERY_SEC)
+            {
+                print("DELETE SOLUTION");
+                msMergerSolutions.Remove(msMergerSolutions[i]);
+                RecalculateSolution();
+                bDeletedThisRound = true;
+            }
+        }
     }
 
     public int GetSolutionIndex(Vector3 v3newLaserDiection, Color32 clrLaserColor)
@@ -61,42 +60,47 @@ public class Merger : MovementObject
     {
         msMergerSolutions[index].fTimeSinceLastSolve = 0;
     }
-    public void AddSolution(MergerSolution ssNewMergerSolution, Vector3 v3PrevDirection, GameObject goLaser)
+    public void AddSolution(MergerSolution ssNewMergerSolution)
     {
-        /*Color32[] clrsToSplit = MMUtils.GetMergedColor(ssNewSpliterSolution.clrLaserColor);
 
-        if (bInvertRays)
-        {
-            clrsToSplit.Reverse();
-        }
+        msMergerSolutions.Add(ssNewMergerSolution);
 
-        ssNewSpliterSolution.tLasers = new Transform[clrsToSplit.Length];
-
-        ssSpliterSolutions.Add(ssNewSpliterSolution);
-
-
-        float fAngleInBetween = 90;//ANGLE_TO_SPLIT / clrsToSplit.Length;
-        float fStartingAngle = -45;//ANGLE_TO_SPLIT + fAngleInBetween;
-        for (int i = 0; i < clrsToSplit.Length; i++)
-        {
-            GameObject go = Instantiate(goLaser, transform.position + goLaser.GetComponent<ScenarioObject>().v3Offset - this.v3Offset, Quaternion.LookRotation(v3PrevDirection));
-            go.transform.Rotate(new Vector3(0, fStartingAngle, 0), Space.Self);
-            fStartingAngle += fAngleInBetween;
-            go.transform.SetParent(transform);
-            ssNewSpliterSolution.tLasers[i] = go.transform;
-            go.GetComponent<RayLaser>().UpdateRayColor(clrsToSplit[i]);
-            go.GetComponent<RayLaser>().SetCilinderActive(false);
-        }*/
-
+        RecalculateSolution();
     }
-    public void TryToMerge(MergerSolution ssNewMergerSolution, Vector3 v3PrevDirection, GameObject goLaser)
+
+    public void RecalculateSolution()
+    {
+        Color32 clrMerge = MMConstants.WHITE;
+
+        mergedLaser.GetComponent<LineRenderer>().enabled = mergedLaser.GetComponent<RayLaser>().enabled = true;
+
+        if (msMergerSolutions.Count == 0)
+        {
+            mergedLaser.GetComponent<LineRenderer>().enabled = mergedLaser.GetComponent<RayLaser>().enabled = false;
+        }
+        else if (msMergerSolutions.Count == 1)
+        {
+            clrMerge = msMergerSolutions[0].clrLaserColor;
+        }
+        else
+        {
+            clrMerge = MMUtils.GetMergedColor(msMergerSolutions[0].clrLaserColor, msMergerSolutions[1].clrLaserColor);
+        }
+        print("SOLUTIONS: " + msMergerSolutions.Count);
+        print("COLOR: " + clrMerge);
+        mergedLaser.GetComponent<RayLaser>().UpdateRayColor(clrMerge);
+    }
+
+    public void TryToMerge(MergerSolution ssNewMergerSolution)
     {
         int idx = GetSolutionIndex(ssNewMergerSolution.v3LaserDirection, ssNewMergerSolution.clrLaserColor);
+        print("IDX: " + idx);
+        print("ssNewMergerSolution: " + ssNewMergerSolution.clrLaserColor);
         if (idx == -1)
         {
             if (msMergerSolutions.Count <= MAX_MERGER)
             {
-                AddSolution(ssNewMergerSolution, v3PrevDirection, goLaser);
+                AddSolution(ssNewMergerSolution);
             }
         }
         else

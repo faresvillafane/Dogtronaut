@@ -12,6 +12,9 @@ public class MMConstants
     public const string TAG_LASER           = "Laser";
     public const string TAG_PLAYER          = "Player";
     public const string TAG_TILE            = "Tile";
+    public const string TAG_GENERIC_RAY_KILLER = "GenericRayKiller";
+
+    
     public const string TAG_WALL            = "Wall";
     public const string TAG_GAME_CONTROLLER = "GameController";
     public const string TAG_CANVAS          = "Canvas";

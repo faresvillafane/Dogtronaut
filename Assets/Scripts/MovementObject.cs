@@ -206,6 +206,11 @@ public class MovementObject : ScenarioObject
         Rotate((bClockWise)? 1 * 45f : -1 * 45f, Vector3.up);
     }
 
+    public void Rotate90D(bool bClockWise = true)
+    {
+        Rotate((bClockWise) ? 1 * 90f : -1 * 90f, Vector3.up);
+    }
+
     public float GetRotationSpeed()
     {
         return fRotatingSpeed;

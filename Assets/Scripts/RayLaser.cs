@@ -114,7 +114,7 @@ public class RayLaser : ScenarioObject
                 {
                     MergerSolution ms = new MergerSolution(clrLaser, laserDirection);
 
-                    hit.transform.GetComponent<Merger>().TryToMerge(ms, prevDirection, this.gameObject);
+                    hit.transform.GetComponentInParent<Merger>().TryToMerge(ms);
                     loopActive = false;
                 }
                 else if (IsRayKiller(hit.transform.gameObject.tag))
@@ -156,7 +156,7 @@ public class RayLaser : ScenarioObject
 
     private bool IsRayKiller(string tag)
     {
-        return ((tag == MMConstants.TAG_SPLITTER) ||(tag == MMConstants.TAG_WALL) || (tag == MMConstants.TAG_RECEIVER) || (tag == MMConstants.TAG_PLAYER) || (tag == MMConstants.TAG_TILE));
+        return ((tag == MMConstants.TAG_SPLITTER) ||(tag == MMConstants.TAG_WALL) || (tag == MMConstants.TAG_RECEIVER) || (tag == MMConstants.TAG_MERGER) || (tag == MMConstants.TAG_PLAYER) || (tag == MMConstants.TAG_TILE) || (tag == MMConstants.TAG_GENERIC_RAY_KILLER));
     }
 
 
