@@ -19,7 +19,7 @@ public class Receiver : MovementObject
 
     private float fTimeSinceLastSolve = 0;
 
-    private const float TIME_TO_SOLVE = 1;
+    private const float TIME_TO_SOLVE = 2;
     private float fTimeSolving = 0;
 
     // Start is called before the first frame update

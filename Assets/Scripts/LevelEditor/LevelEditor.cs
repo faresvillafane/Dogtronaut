@@ -9,7 +9,7 @@ using UnityEditor.SceneManagement;
 public class LevelEditor : MonoBehaviour
 {
     private Transform tContainer;
-    public GameObject prefEditorTile, prefTile, prefMirror, prefReceiver, prefSplitter, prefRocks, prefLaser, prefCharacter,prefMerger, prefBigRock;
+    public GameObject prefEditorTile, prefTile, prefMirror, prefReceiver, prefSplitter, prefRocks, prefLaser, prefCharacter,prefMerger, prefBigRock, prefDuplicator;
     [Range(7,50)]
     public int iTileSize = 5;
 
@@ -139,6 +139,9 @@ public class LevelEditor : MonoBehaviour
                             break;
                         case MMEnums.TileType.BIG_ROCK:
                             goToInstantiate = prefBigRock;
+                            break;
+                        case MMEnums.TileType.DUPLICATOR:
+                            goToInstantiate = prefDuplicator;
                             break;
                     }
                     if (goToInstantiate != null)

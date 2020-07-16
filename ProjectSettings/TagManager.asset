@@ -15,6 +15,7 @@ TagManager:
   - Tile
   - LevelSelect
   - GenericRayKiller
+  - Duplicator
   layers:
   - Default
   - TransparentFX

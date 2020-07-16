@@ -406,7 +406,9 @@ MonoBehaviour:
     type: 3}
   prefBigRock: {fileID: 1882195935702481946, guid: b05b681554434174fabd9e846480384c,
     type: 3}
-  iTileSize: 9
+  prefDuplicator: {fileID: 2829101921451844198, guid: 9d570ee044394714db44b01dd6d38267,
+    type: 3}
+  iTileSize: 15
   tiles:
   - {fileID: 0}
   - {fileID: 0}
@@ -489,7 +491,151 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  lvlExit: {fileID: 11400000, guid: c1382a34b628d9c48af16697de373ffb, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  lvlExit: {fileID: 11400000, guid: 913ff29538cd66244856e6c053b30786, type: 2}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -786,6 +932,8 @@ MonoBehaviour:
     type: 3}
   goBigRock: {fileID: 1882195935702481946, guid: b05b681554434174fabd9e846480384c,
     type: 3}
+  goDuplicator: {fileID: 2829101921451844198, guid: 9d570ee044394714db44b01dd6d38267,
+    type: 3}
   levels:
   - {fileID: 11400000, guid: 65b7c3f804dbdc24e8be09176700ff47, type: 2}
   - {fileID: 11400000, guid: 6fd60d004be445e49b71b4ac5c50d9ce, type: 2}
@@ -799,7 +947,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a991d77d6a1c9934c8b2bd08f17d51f9, type: 2}
   - {fileID: 11400000, guid: e40ff29760ad45446b1fb23fb82c69bb, type: 2}
   - {fileID: 11400000, guid: d7f1f682629acf545b2688ea518c690b, type: 2}
-  - {fileID: 11400000, guid: c1382a34b628d9c48af16697de373ffb, type: 2}
+  - {fileID: 11400000, guid: fb52a890e9ab6cd44861664c2cb5bd4a, type: 2}
+  - {fileID: 11400000, guid: 913ff29538cd66244856e6c053b30786, type: 2}
   cameraManager: {fileID: 963194229}
 --- !u!4 &831092398
 Transform:

@@ -14,6 +14,7 @@ public class LevelBuilder : MonoBehaviour
     public GameObject goCharacter;
     public GameObject goMerger;
     public GameObject goBigRock;
+    public GameObject goDuplicator;
 
     public LevelData[] levels;
 
@@ -93,6 +94,9 @@ public class LevelBuilder : MonoBehaviour
                         break;
                     case MMEnums.TileType.BIG_ROCK:
                         goToInstantiate = goBigRock;
+                        break;
+                    case MMEnums.TileType.DUPLICATOR:
+                        goToInstantiate = goDuplicator;
                         break;
                 }
 
