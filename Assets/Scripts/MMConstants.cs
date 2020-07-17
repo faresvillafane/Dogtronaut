@@ -7,6 +7,8 @@ public class MMConstants
     public const string TAG_MIRROR          = "Mirror";
     public const string TAG_SPLITTER        = "Splitter";
     public const string TAG_MERGER          = "Merger";
+    public const string TAG_DUPLICATOR      = "Duplicator";
+    
     public const string TAG_LINE_SPAWN      = "LineSpawn";
     public const string TAG_RECEIVER        = "Receiver";
     public const string TAG_LASER           = "Laser";

@@ -30,6 +30,7 @@ public class MovementObject : ScenarioObject
     {
         base.Start();
         qCurrentRotation = qTargetRotation = transform.rotation;
+        v3LookDirection = qCurrentRotation.eulerAngles;
         v3CurrentPosition = v3TargetPosition = transform.position;
         SetEnableMovement();
     }

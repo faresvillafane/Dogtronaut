@@ -110,6 +110,15 @@ public class RayLaser : ScenarioObject
                     
                     loopActive = false;
                 }
+                else if (hit.transform.gameObject.tag == MMConstants.TAG_DUPLICATOR)
+                {
+
+
+                    SplitterSolution ss = new SplitterSolution(clrLaser, laserDirection);
+                    hit.transform.GetComponent<Duplicator>().TryToSplit(ss, prevDirection, this.gameObject);
+
+                    loopActive = false;
+                }
                 else if (hit.transform.gameObject.tag == MMConstants.TAG_MERGER)
                 {
                     MergerSolution ms = new MergerSolution(clrLaser, laserDirection);
@@ -156,7 +165,7 @@ public class RayLaser : ScenarioObject
 
     private bool IsRayKiller(string tag)
     {
-        return ((tag == MMConstants.TAG_SPLITTER) ||(tag == MMConstants.TAG_WALL) || (tag == MMConstants.TAG_RECEIVER) || (tag == MMConstants.TAG_MERGER) || (tag == MMConstants.TAG_PLAYER) || (tag == MMConstants.TAG_TILE) || (tag == MMConstants.TAG_GENERIC_RAY_KILLER));
+        return ((tag == MMConstants.TAG_SPLITTER) ||(tag == MMConstants.TAG_WALL) || (tag == MMConstants.TAG_RECEIVER) || (tag == MMConstants.TAG_MERGER) || (tag == MMConstants.TAG_DUPLICATOR) || (tag == MMConstants.TAG_PLAYER) || (tag == MMConstants.TAG_TILE) || (tag == MMConstants.TAG_GENERIC_RAY_KILLER));
     }
 
 

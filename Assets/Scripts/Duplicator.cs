@@ -54,9 +54,7 @@ public class Duplicator : MovementObject
         bInvertRays = !bInvertRays;
         for (int i = 0; i < ssSpliterSolutions.Count; i++)
         {
-            Quaternion qAuxRotation = ssSpliterSolutions[i].tLasers[0].transform.rotation;
-            ssSpliterSolutions[i].tLasers[0].transform.rotation = ssSpliterSolutions[i].tLasers[1].transform.rotation;
-            ssSpliterSolutions[i].tLasers[1].transform.rotation = qAuxRotation;
+            ssSpliterSolutions[i].tLasers[1].transform.Rotate(new Vector3(0, 180, 0), Space.Self);
         }
     }
 
@@ -84,18 +82,14 @@ public class Duplicator : MovementObject
         Color32[] clrsToSplit = new Color32[2];
         clrsToSplit[0] = ssNewSpliterSolution.clrLaserColor;
         clrsToSplit[1] = ssNewSpliterSolution.clrLaserColor;
-
-        if (bInvertRays)
-        {
-            clrsToSplit.Reverse();
-        }
+        int iReverse = (bInvertRays) ? -1 : 1;
 
         ssNewSpliterSolution.tLasers = new Transform[clrsToSplit.Length];
 
         ssSpliterSolutions.Add(ssNewSpliterSolution);
 
 
-        float fAngleInBetween = 90;//ANGLE_TO_SPLIT / clrsToSplit.Length;
+        float fAngleInBetween = 90 * iReverse;//ANGLE_TO_SPLIT / clrsToSplit.Length;
         float fStartingAngle = 0;//ANGLE_TO_SPLIT + fAngleInBetween;
         for (int i = 0; i < clrsToSplit.Length; i++)
         {
