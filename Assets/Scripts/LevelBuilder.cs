@@ -49,7 +49,6 @@ public class LevelBuilder : MonoBehaviour
 
     public void GenerateBaseLevel(LevelData curLevel)
     {
-        cameraManager.PlaceCamera(curLevel.MaxSize);
         int iObjectPlacementNumber = 0;
         int iObjectMovementNumber = 0;
         int iObjectColorNumber = 0;
@@ -66,7 +65,10 @@ public class LevelBuilder : MonoBehaviour
                 {
                     goNewTile.SetActive(false);
                 }
-
+                if(index == (curLevel.MaxSize * curLevel.MaxSize) / 2)
+                {
+                    cameraManager.PlaceCamera(curLevel.MaxSize, goNewTile);
+                }
                 GameObject goToInstantiate = null;
                 switch ((MMEnums.TileType) int.Parse(sLevelObjects[index]))
                 {

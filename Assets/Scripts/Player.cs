@@ -16,6 +16,8 @@ public class Player : MovementObject
     private UIManager uiManager;
     private GameController gc;
 
+    //TODO ONLY SAVE ONCE PER DOG
+    public bool bFirstDogOnlySave = false;
     private void Awake()
     {
         uiManager = GameObject.FindGameObjectWithTag(MMConstants.TAG_GAME_CONTROLLER).GetComponent<UIManager>();

@@ -93,8 +93,8 @@ public class Splitter : MovementObject
         ssSpliterSolutions.Add(ssNewSpliterSolution);
 
 
-        float fAngleInBetween = 90;//ANGLE_TO_SPLIT / clrsToSplit.Length;
-        float fStartingAngle = -45;//ANGLE_TO_SPLIT + fAngleInBetween;
+        float fAngleInBetween = 180;//ANGLE_TO_SPLIT / clrsToSplit.Length;
+        float fStartingAngle = -90;//ANGLE_TO_SPLIT + fAngleInBetween;
         for (int i = 0; i < clrsToSplit.Length; i++)
         {
             GameObject go = Instantiate(goLaser, transform.position + goLaser.GetComponent<ScenarioObject>().v3Offset - this.v3Offset, Quaternion.LookRotation(v3PrevDirection));

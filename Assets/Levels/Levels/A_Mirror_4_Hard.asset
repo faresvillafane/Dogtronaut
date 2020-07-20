@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c4763fb20454b6745af1ba4d83761dbe, type: 3}
-  m_Name: MirrorHard
+  m_Name: A_Mirror_4_Hard
   m_EditorClassIdentifier: 
   LevelNumber: 0
   levelName: 
