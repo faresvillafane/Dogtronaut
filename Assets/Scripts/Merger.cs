@@ -86,16 +86,12 @@ public class Merger : MovementObject
         {
             clrMerge = MMUtils.GetMergedColor(msMergerSolutions[0].clrLaserColor, msMergerSolutions[1].clrLaserColor);
         }
-        print("SOLUTIONS: " + msMergerSolutions.Count);
-        print("COLOR: " + clrMerge);
         mergedLaser.GetComponent<RayLaser>().UpdateRayColor(clrMerge);
     }
 
     public void TryToMerge(MergerSolution ssNewMergerSolution)
     {
         int idx = GetSolutionIndex(ssNewMergerSolution.v3LaserDirection, ssNewMergerSolution.clrLaserColor);
-        print("IDX: " + idx);
-        print("ssNewMergerSolution: " + ssNewMergerSolution.clrLaserColor);
         if (idx == -1)
         {
             if (msMergerSolutions.Count <= MAX_MERGER)

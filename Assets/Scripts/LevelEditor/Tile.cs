@@ -23,7 +23,6 @@ public class Tile : MonoBehaviour
     {
         if (!bValueChanged && ttTile != ttPrevTile)
         {
-            print("TILE CHANGED!");
             bValueChanged = true;
 
             GetComponentInParent<LevelEditor>().RefreshTiles();

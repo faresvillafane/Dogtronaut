@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -83,10 +84,8 @@ public class Splitter : MovementObject
     {
         Color32[] clrsToSplit = MMUtils.ColorSplitter(ssNewSpliterSolution.clrLaserColor);
 
-        if (bInvertRays)
-        {
-            clrsToSplit.Reverse();
-        }
+       
+        int iReverse = (bInvertRays) ? -1 : 1;
 
         ssNewSpliterSolution.tLasers = new Transform[clrsToSplit.Length];
 
@@ -94,7 +93,7 @@ public class Splitter : MovementObject
 
 
         float fAngleInBetween = 180;//ANGLE_TO_SPLIT / clrsToSplit.Length;
-        float fStartingAngle = -90;//ANGLE_TO_SPLIT + fAngleInBetween;
+        float fStartingAngle = -90 * iReverse;//ANGLE_TO_SPLIT + fAngleInBetween;
         for (int i = 0; i < clrsToSplit.Length; i++)
         {
             GameObject go = Instantiate(goLaser, transform.position + goLaser.GetComponent<ScenarioObject>().v3Offset - this.v3Offset, Quaternion.LookRotation(v3PrevDirection));
