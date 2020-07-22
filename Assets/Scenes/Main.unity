@@ -491,7 +491,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  lvlExit: {fileID: 11400000, guid: cd7ec80176aa98a42b6ad1dff0920ff2, type: 2}
+  lvlExit: {fileID: 11400000, guid: c1382a34b628d9c48af16697de373ffb, type: 2}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -807,6 +807,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 792ce5a7516d1dd4ba7f132003308233, type: 2}
   - {fileID: 11400000, guid: 2de47866dd5e48d4caf5f2c12ab01277, type: 2}
   - {fileID: 11400000, guid: 7f43c314f6184714a833c2bf438fb353, type: 2}
+  - {fileID: 11400000, guid: baf0aea5788d3c746b23d4bbb94013c2, type: 2}
+  - {fileID: 11400000, guid: cd7ec80176aa98a42b6ad1dff0920ff2, type: 2}
+  - {fileID: 11400000, guid: dc811837056d70344add926bf1c48b50, type: 2}
+  - {fileID: 11400000, guid: 79a4df036e0b340428724fab912097cd, type: 2}
   cameraManager: {fileID: 963194229}
 --- !u!4 &831092398
 Transform:

@@ -13,11 +13,27 @@ MonoBehaviour:
   m_Name: E_Misc_2_Easy
   m_EditorClassIdentifier: 
   LevelNumber: 0
-  levelName: 
+  levelName: MiscE
   description: 
   levelDifficulty: 1
-  levelBuild: 
-  objRotation: []
-  objColor: []
-  objMovementEnabled: 
-  MaxSize: 5
+  levelBuild: -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,5,5,5,5,8,5,5,5,5,-1,-1,5,0,0,0,8,0,0,0,5,-1,-1,5,0,8,0,0,0,0,0,5,-1,-1,5,0,0,0,8,0,2,0,5,-1,-1,5,0,0,0,8,0,0,0,5,-1,-1,5,6,3,0,8,0,6,0,5,-1,-1,5,0,0,0,8,0,3,0,5,-1,-1,5,0,0,0,8,0,0,0,5,-1,-1,5,5,1,5,8,5,5,5,5,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1
+  objRotation:
+  - {x: -0, y: 0, z: 0}
+  - {x: -0, y: 0, z: 0}
+  - {x: -0, y: 0, z: 0}
+  - {x: -0, y: 0, z: 0}
+  - {x: -0, y: 0, z: 0}
+  - {x: -0, y: 270, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  objColor:
+  - {r: 0, g: 0, b: 1, a: 1}
+  - {r: 0, g: 0, b: 1, a: 1}
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
+  objMovementEnabled: 000000000100010000010000000000
+  MaxSize: 11

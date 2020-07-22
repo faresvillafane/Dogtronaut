@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: C_Splitter_2_Easy
   m_EditorClassIdentifier: 
   LevelNumber: 0
-  levelName: 
+  levelName: SplitE
   description: 
   levelDifficulty: 1
   levelBuild: 5,5,5,5,5,5,5,5,0,0,0,0,0,5,1,0,0,4,0,0,5,5,0,0,0,0,0,5,2,6,0,3,0,0,2,5,0,0,0,0,0,5,5,5,5,5,5,5,5

@@ -46,7 +46,7 @@ public class MenuController : MonoBehaviour
             recRenderer.material.SetColor("_Color", clrDifficulty[(int)lb.levels[i].levelDifficulty]);
 
             v3CurrentPosition = v3StartPosition + MMUtils.ListToMatrix(i,MAX_COLUMN) * fOffset;
-            goLevelSelect.GetComponentInChildren<TextMesh>().text = i.ToString();
+            goLevelSelect.GetComponentInChildren<TextMesh>().text = (i+1).ToString();
         }
     }
 

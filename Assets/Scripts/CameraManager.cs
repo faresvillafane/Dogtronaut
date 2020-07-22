@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,8 +18,7 @@ public class CameraManager : MonoBehaviour
 
     public void PlaceCamera(int iMaxSize, GameObject goCenterTile)
     {
-        Vector3 v3CenterTile = new Vector3(iMaxSize/2,.4f, iMaxSize / 2);
-        this.transform.position = v3CenterTile + new Vector3(0, iMaxSize, -iMaxSize);
+        this.transform.position = goCenterTile.transform.position + new Vector3(0, iMaxSize * .6f, -iMaxSize * .6f);
         transform.LookAt(goCenterTile.transform.position);
     }
 

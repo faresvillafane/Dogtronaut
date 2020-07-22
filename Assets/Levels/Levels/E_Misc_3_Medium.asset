@@ -13,11 +13,40 @@ MonoBehaviour:
   m_Name: E_Misc_3_Medium
   m_EditorClassIdentifier: 
   LevelNumber: 0
-  levelName: 
+  levelName: MiscM
   description: 
   levelDifficulty: 2
-  levelBuild: 
-  objRotation: []
-  objColor: []
-  objMovementEnabled: 
-  MaxSize: 5
+  levelBuild: -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,5,2,5,2,5,1,5,-1,-1,1,0,0,0,0,0,2,-1,-1,5,0,0,6,0,0,5,-1,-1,1,0,6,3,6,0,1,-1,-1,5,0,0,6,0,0,5,-1,-1,2,0,0,0,0,0,1,-1,-1,5,1,5,2,5,2,5,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1
+  objRotation:
+  - {x: -0, y: 0, z: 0}
+  - {x: -0, y: 0, z: 0}
+  - {x: -0, y: 90, z: -0}
+  - {x: -0, y: 0, z: 0}
+  - {x: -0, y: 0, z: 0}
+  - {x: -0, y: 0, z: 0}
+  - {x: -0, y: 0, z: 0}
+  - {x: -0, y: 0, z: 0}
+  - {x: -0, y: 44.999996, z: -0}
+  - {x: -0, y: 0, z: 0}
+  - {x: -0, y: 180, z: -0}
+  - {x: -0, y: 0, z: 0}
+  - {x: -0, y: 0, z: 0}
+  - {x: -0, y: 180, z: -0}
+  - {x: -0, y: 270, z: 0}
+  - {x: -0, y: 0, z: 0}
+  - {x: -0, y: 0, z: 0}
+  objColor:
+  - {r: 1, g: 1, b: 0, a: 1}
+  - {r: 0.5019608, g: 0, b: 1, a: 1}
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 1, g: 0.5019608, b: 0, a: 1}
+  - {r: 1, g: 0.5019608, b: 0, a: 1}
+  - {r: 0.5019608, g: 0, b: 1, a: 1}
+  - {r: 0, g: 1, b: 0, a: 1}
+  - {r: 1, g: 0.5019608, b: 0, a: 1}
+  - {r: 1, g: 0.5019608, b: 0, a: 1}
+  - {r: 1, g: 1, b: 0, a: 1}
+  - {r: 0, g: 1, b: 0, a: 1}
+  - {r: 1, g: 0, b: 0, a: 1}
+  objMovementEnabled: 01010100010101
+  MaxSize: 9

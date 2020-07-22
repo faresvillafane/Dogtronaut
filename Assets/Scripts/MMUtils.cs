@@ -116,7 +116,7 @@ public class MMUtils : MonoBehaviour
 
     public static  Color32 GetMergedColor(Color32 clrMerge1, Color32 clrMerge2)
     {
-        Color32 clrResult = MMConstants.WHITE;
+        Color32 clrResult = clrMerge1;
 
         if (clrMerge1.Equals(clrMerge2))
         {
