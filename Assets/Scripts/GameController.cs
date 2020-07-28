@@ -34,6 +34,8 @@ public class GameController : MonoBehaviour
     private const float REGISTER_PRESS_IN = .25f;
     private float fButtonPressTime = 0;
 
+    public List<UndoMatrix> undoScenarioObjects = new List<UndoMatrix>();
+
     void Start()
     {
         canvas.SetActive(true);
@@ -180,13 +182,14 @@ public class GameController : MonoBehaviour
     {
         for (int i = 0; i < mo.Length ; i++)
         {
-            //if (mo[i].name.Contains("Mir"))
-            {
-                //print(mo[i].name);
-                
-                mo[i].SaveUndoData(); 
-            }
+
+            mo[i].SaveUndoData(); 
         }
+
+        UndoMatrix um = new UndoMatrix();
+        um.scenarioObjects = new GameObject[scenarioObjects.Length];
+        um.scenarioObjects = (GameObject[])scenarioObjects.Clone();
+        undoScenarioObjects.Add(um);
     }
 
     
@@ -198,13 +201,15 @@ public class GameController : MonoBehaviour
 
         for (int i = 0; i < mo.Length ; i++)
         {
-            //if (mo[i].name.Contains("Mir"))
-            {
-                //print(mo[i].name);
-                //ORDENAR POR DISTANCIA A DOG
-                mo[i].LoadLastUndoData();
-                yield return new WaitForEndOfFrame();
-            }
+            
+            mo[i].LoadLastUndoData();
+            yield return new WaitForEndOfFrame();
+        }
+
+        if (undoScenarioObjects.Count > 1)
+        {
+            scenarioObjects = undoScenarioObjects[undoScenarioObjects.Count - 1].scenarioObjects;
+            undoScenarioObjects.RemoveAt(undoScenarioObjects.Count - 1);
         }
     }
 }

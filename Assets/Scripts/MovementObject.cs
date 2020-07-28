@@ -10,8 +10,8 @@ public class MovementObject : ScenarioObject
     private Vector3 v3TargetPosition;
     private Vector3 v3CurrentPosition;
 
-    private float fRotatingSpeed = .05f;
-    private float fMovementSpeed = .1f;
+    private float fRotatingSpeed = 5f;
+    private float fMovementSpeed = 18f;
 
     protected bool bFinishedRotating = true, bfinishedMoving = true;
 
@@ -24,7 +24,6 @@ public class MovementObject : ScenarioObject
     public GameObject[] goMovementObjects;
 
     public List<UndoData> undoDatas = new List<UndoData>();
-
 
     protected new void Start()
     {
@@ -71,13 +70,14 @@ public class MovementObject : ScenarioObject
     {
         if ( !(MMUtils.AtTarget(transform.position.x, v3TargetPosition.x) && MMUtils.AtTarget(transform.position.z, v3TargetPosition.z)))
         {
-            transform.position = Vector3.Lerp(transform.position, this.GetTargetMovement(), this.GetMovementSpeed());
+            transform.position = Vector3.Lerp(transform.position, this.GetTargetMovement(), this.GetMovementSpeed() * Time.deltaTime);
             return false;
         }
         else
         {
             transform.position = GetTargetMovement();
             v3CurrentPosition = GetTargetMovement();
+
             return true;
         }
 
@@ -87,7 +87,7 @@ public class MovementObject : ScenarioObject
     {
         if (Quaternion.Angle(this.transform.rotation, this.GetTargetRotation()) >= 1f)
         {
-            transform.rotation = Quaternion.Slerp(transform.rotation, this.GetTargetRotation(), this.GetRotationSpeed());
+            transform.rotation = Quaternion.Slerp(transform.rotation, this.GetTargetRotation(), this.GetRotationSpeed() * Time.deltaTime);
             return false;
         }
         else
@@ -252,18 +252,16 @@ public class MovementObject : ScenarioObject
     {
         if (undoDatas.Count > 1)
         {
+            Vector3 v3CurrentAuxPos = v3CurrentPosition;
             v3TargetPosition = undoDatas[undoDatas.Count - 1].v3Position;
             qTargetRotation = undoDatas[undoDatas.Count - 1].qRotation;
 
-            Vector3 v3Direction = v3CurrentPosition - v3TargetPosition;
-
+            Vector3 v3Direction = v3CurrentAuxPos - v3TargetPosition;
+            
             undoDatas.RemoveAt(undoDatas.Count - 1);
 
-            //if (v3Direction != Vector3.zero)
-            {
-                RefreshLevelReference(v3Direction);
-                v3LookDirection = v3Direction;
-            }
+            v3LookDirection = v3Direction;
+
             bfinishedMoving = false;
             bFinishedRotating = false;
         }

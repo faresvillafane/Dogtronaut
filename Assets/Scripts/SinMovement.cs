@@ -9,8 +9,8 @@ public class SinMovement : MonoBehaviour
 
     public MoveType mt = MoveType.MOVEY;
     private Vector3 v3StartingV3;
-    public float fOffset = .25f;
-    public float fSpeed = 2f;
+    private float fOffset = .05f;
+    private float fSpeed = 1f;
     public MovementObject mo;
 
     private float fSinValue = 0;
